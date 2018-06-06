@@ -11,8 +11,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.goosen1.commons.annotations.ResponseResult;
+import com.goosen1.commons.model.po.user.UserList;
+import com.goosen1.commons.model.request.BasePageReqData;
 import com.goosen1.commons.model.response.BaseModelRespData;
+import com.goosen1.commons.model.response.BasePageRespData;
+import com.goosen1.commons.model.response.user.UserList1;
 import com.goosen1.commons.model.response.user.UserModel1;
 import com.goosen1.commons.utils.CheckUtil;
 import com.goosen1.service.UserService;
@@ -99,16 +105,14 @@ public class PersonController {
 		return baseModelRespData;
 	}
 	
-//	//分页
-//	@ApiOperation(value="获取用户列表1")
-//	@ResponseResult
+	//分页
+	@ApiOperation(value="获取用户列表1")
+	@ResponseResult
 //	@GetMapping
-//	@RequestMapping(value = {"getUserList1"},method=RequestMethod.GET)
-//    public BasePageRespData<UserList1> getUserList1(BasePageReqData pageQO) {
-//		Page<UserList1> page = PageHelper.startPage(pageQO.getPageNum(), pageQO.getPageSize(), pageQO.getOrderBy());
-//		userService.findAllUserList();
-//        return BasePageRespData.build(page);
-//    }
+	@RequestMapping(value = {"getUserList1"},method=RequestMethod.GET)
+    public BasePageRespData<UserList1> getUserList1(BasePageReqData pageQO) {
+        return userService.findAllUserListByPage(pageQO);
+    }
 	
 //	//不分页，全部
 //	@ApiOperation(value="获取全部用户列表1")
