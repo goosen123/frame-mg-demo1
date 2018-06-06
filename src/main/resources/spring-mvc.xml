@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
-		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-4.1.xsd ">
     
     <description>Spring MVC Configuration</description>
     
@@ -14,6 +17,12 @@
 	<context:component-scan base-package="com.goosen1" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
+	
+	<!-- aop -->
+	<!-- 配置切面的类 -->
+	<!-- <bean id="serviceAspect" class="com.goosen.demo2.commons.aop.RestControllerAspect"/>  -->
+	<!-- 开启aop注解方式，此步骤不能少，这样java类中的aop注解才会生效 -->
+    <aop:aspectj-autoproxy/> 
     
 	<!-- 默认的注解映射的支持，org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping -->
 	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager">
@@ -28,6 +37,15 @@
             
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	<!-- 拦截器 -->
+	<mvc:interceptors>
+         <mvc:interceptor>
+             <!-- 拦截所有URL中包含/**的请求 -->
+             <mvc:mapping path="/**"/>
+             <bean class="com.goosen1.interceptor.ResponseResultInterceptor"></bean>
+         </mvc:interceptor>
+     </mvc:interceptors>
 	
     <!-- REST中根据URL后缀自动判定Content-Type及相应的View -->
 	<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">
