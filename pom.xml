@@ -54,8 +54,8 @@
 	<repositories>
 	
 		<repository>
-			<id>jeesite-repos</id>
-			<name>Jeesite Repository</name>
+			<id>goosen-repos</id>
+			<name>Goosen Repository</name>
 			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</repository>
 		
@@ -65,12 +65,12 @@
 	<pluginRepositories> 
 	
 		<pluginRepository>
-			<id>jeesite-repos</id>
-			<name>Jeesite Repository</name>
+			<id>goosen-repos</id>
+			<name>Goosen Repository</name>
 			<url>http://maven.aliyun.com/nexus/content/groups/public</url>
 		</pluginRepository>
 		
-	</pluginRepositories> 
+	</pluginRepositories>  
 	
 	<!-- 依赖项定义 -->
 	<dependencies>
